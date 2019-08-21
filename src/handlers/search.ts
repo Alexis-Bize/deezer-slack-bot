@@ -37,6 +37,12 @@ const onSearchResult = (response: SearchResult, channelId: string) => ({
 					text: '▶️ Listen on Deezer',
 					url: `https://www.deezer.com/track/${response.id}`,
 					style: 'primary'
+				},
+				{
+					type: 'button',
+					text: 'Download the app',
+					url: `https://www.deezer.com/download`,
+					style: 'secondary'
 				}
 			]
 		}
