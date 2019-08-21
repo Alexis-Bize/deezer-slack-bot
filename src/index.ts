@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use((_, res, next) => {
-	res.setHeader('X-Powered-By', 'abi@deezer.com');
+	res.setHeader('X-Powered-By', 'Alexis Bize');
 	return next();
 });
 
