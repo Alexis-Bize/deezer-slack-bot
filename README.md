@@ -11,3 +11,7 @@ Share your favorite songs with a single command.
 ```
 /deezer [ text ]
 ```
+
+### Special thanks
+
+— Clément Durandeau for the idea :)
