@@ -1,3 +1,5 @@
+.prettierrc
 README.md
+deezer-slack-bot-preview.png
 node_modules/
 dist/
