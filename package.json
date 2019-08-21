@@ -1,0 +1,42 @@
+{
+	"name": "deezer-slack-bot",
+	"description": "Share your favorite songs on Slack with a single command.",
+	"version": "0.1.0",
+	"keywords": [
+		"deezer",
+		"slack",
+		"bot"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Alexis-Bize/deezer-slack-bot"
+	},
+	"license": "MIT",
+	"types": "./index.d.ts",
+	"author": {
+		"name": "Alexis Bize",
+		"email": "alexis.bize@gmail.com"
+	},
+	"scripts": {
+		"build": "npm run clean && ./node_modules/.bin/tsc",
+		"clean": "rm -rf ./dist",
+		"serve": "node ./index.js",
+		"start": "npm run build && npm run serve",
+		"now-build": "npm run build",
+		"test": "echo \"No tests specified\""
+	},
+	"dependencies": {
+		"body-parser": "^1.19.0",
+		"dotenv": "^8.1.0",
+		"express": "^4.17.1",
+		"request": "^2.88.0"
+	},
+	"devDependencies": {
+		"@types/body-parser": "^1.17.0",
+		"@types/dotenv": "^6.1.1",
+		"@types/express": "^4.17.0",
+		"@types/node": "^12.0.10",
+		"@types/request": "^2.48.2",
+		"typescript": "^3.5.2"
+	}
+}
