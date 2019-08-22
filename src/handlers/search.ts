@@ -3,17 +3,17 @@ import { Request, Response } from 'express';
 import { createErrorPayload } from '../modules/utils';
 
 type SearchResult = {
-	id: string;
+	id: number | string;
 	title: string;
 	artist: {
-		id: string;
+		id: number | string;
 		name: string;
 		link: string;
-		picture_small: string;
+		picture_small: string | null;
 		[key: string]: any;
 	};
 	album: {
-		cover_medium: string;
+		cover_medium: string | null;
 		[key: string]: any;
 	};
 	[key: string]: any;
