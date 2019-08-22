@@ -44,13 +44,14 @@ const createAttachement = (response: SearchResult) => ({
 });
 
 export const handleSearch = (req: Request, res: Response) => {
-	const { text = '', channel_id = null, user_name = 'N/A' } = req.body;
+	const { text = '', channel_id = null, user_id = null } = req.body;
 
 	if (String(text).length === 0) {
 		return res.send(
 			createErrorPayload("Oops! You didn't provide any text!")
 		);
-	} else if (channel_id === null) return res.sendStatus(400);
+	} else if (channel_id === null || user_id === null)
+		return res.sendStatus(400);
 
 	const query = text.length >= 50 ? text.substring(0, 50) : text;
 
@@ -77,7 +78,7 @@ export const handleSearch = (req: Request, res: Response) => {
 					attachments: [
 						{
 							...createAttachement(body.data[0]),
-							footer: `Shared by @${user_name}`
+							footer: `Shared by <@${user_id}>`
 						}
 					]
 				});
