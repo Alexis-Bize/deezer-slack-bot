@@ -9,7 +9,7 @@ Share your favorite songs with a single command.
 ### Usage
 
 ```
-/deezer [ text ]
+/deezer [text]
 ```
 
 ### Special thanks
