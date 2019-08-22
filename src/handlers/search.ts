@@ -19,38 +19,32 @@ type SearchResult = {
 	[key: string]: any;
 };
 
-const onSearchResult = (response: SearchResult, channelId: string) => ({
-	response_type: 'in_channel',
-	channel: channelId,
-	attachments: [
+const createAttachement = (response: SearchResult) => ({
+	color: '#007feb',
+	author_icon: response.artist.picture_small,
+	author_link: `https://www.deezer.com/artist/${response.artist.id}`,
+	author_name: response.artist.name,
+	title: response.title,
+	title_link: `https://www.deezer.com/track/${response.id}`,
+	image_url: response.album.cover_medium,
+	actions: [
 		{
-			color: '#007feb',
-			author_icon: response.artist.picture_small,
-			author_link: `https://www.deezer.com/artist/${response.artist.id}`,
-			author_name: response.artist.name,
-			title: response.title,
-			title_link: `https://www.deezer.com/track/${response.id}`,
-			image_url: response.album.cover_medium,
-			actions: [
-				{
-					type: 'button',
-					text: '▶️ Listen on Deezer',
-					url: `https://www.deezer.com/track/${response.id}`,
-					style: 'primary'
-				},
-				{
-					type: 'button',
-					text: 'Download the app',
-					url: `https://www.deezer.com/download`,
-					style: 'secondary'
-				}
-			]
+			type: 'button',
+			text: '▶️ Listen on Deezer',
+			url: `https://www.deezer.com/track/${response.id}`,
+			style: 'primary'
+		},
+		{
+			type: 'button',
+			text: 'Download the app',
+			url: `https://www.deezer.com/download`,
+			style: 'secondary'
 		}
 	]
 });
 
 export const handleSearch = (req: Request, res: Response) => {
-	const { text = '', channel_id = null } = req.body;
+	const { text = '', channel_id = null, user_name = 'N/A' } = req.body;
 
 	if (String(text).length === 0) {
 		return res.send(
@@ -72,11 +66,21 @@ export const handleSearch = (req: Request, res: Response) => {
 			if (err) throw err;
 			else if (response.statusCode !== 200)
 				throw new Error('Invalid HTTP response');
-			return res.send(
-				body.data[0] !== void 0
-					? onSearchResult(body.data[0], channel_id)
-					: createErrorPayload(`No results for "${query}"`)
-			);
+			else if (body.data[0] === void 0)
+				return res.send(
+					createErrorPayload(`No results for "${query}"`)
+				);
+			else
+				return res.send({
+					response_type: 'in_channel',
+					channel: channel_id,
+					attachments: [
+						{
+							...createAttachement(body.data[0]),
+							footer: `Shared by @${user_name}`
+						}
+					]
+				});
 		}
 	);
 };

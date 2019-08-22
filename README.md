@@ -14,4 +14,4 @@ Share your favorite songs with a single command.
 
 ### Special thanks
 
--   Clément Durandeau for the idea :)
+-   Clément Durandeau for the idea.
