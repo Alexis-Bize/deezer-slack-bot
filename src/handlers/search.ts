@@ -60,7 +60,7 @@ export const handleSearch = (req: Request, res: Response) => {
 			json: true,
 			uri: `https://api.deezer.com/search/track?q=${encodeURIComponent(
 				query
-			)}`
+			)}&limit=1`
 		},
 		(err, response, body) => {
 			if (err) throw err;
